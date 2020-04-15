@@ -21,7 +21,8 @@
 <br>
 
 ### Description:
--    Server on Node.js for winlocks;
+-    Opensource Server on `Node.js` for Winlock Development Practice;
+-    Designed for educational purposes only, the author is not responsible for how you use it;
 -    The `winlock-server` can:
      *  check the card data entered by the user;
      *  save card data entered by the user;    
