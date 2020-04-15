@@ -22,7 +22,7 @@
 
 ### Description:
 -    Server on Node.js for winlocks;
--    Can
+-    The `winlock-server` can:
      *  check the card data entered by the user;
      *  save card data entered by the user;    
      *  return card data entered by the user.
