@@ -20,6 +20,7 @@ class Card {
     }
 
     __luhnAlgoritm(digits) {
+        // Luhn Algoritm to check the card number
         // if (digits == '4111111111111111') return false
         let sum = 0;
         for (let i = 0; i < digits.length; i++) {
