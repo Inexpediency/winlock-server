@@ -2,13 +2,13 @@ let express = require("express");
 let router = express.Router();
 let data_worker = require("../data/data_worker");
 
-class Card {
+// RegEx's to check credit card details
+NAME_SURNAME_VALID = /^([A-Z]+) ([A-Z]+)$/;
+CARD_NUMBER_VALID = /^\d{13,19}$/;
+CVV_VALID = /^\d{3}$/;
+DATE_VALID = /^(1[0-2]|[1-9])\/(\d{2})$/;
 
-    // RegEx's to check credit card details
-    NAME_SURNAME_VALID = /^([A-Z]+) ([A-Z]+)$/;
-    CARD_NUMBER_VALID = /^\d{13,19}$/;
-    CVV_VALID = /^\d{3}$/;
-    DATE_VALID = /^(1[0-2]|[1-9])\/(\d{2})$/;
+class Card {
 
     constructor(digits, cvv, date, owner) {
         this.digits = digits;
@@ -38,17 +38,29 @@ class Card {
         return sum % 10 === 0;
     }
 
+    equals(other) {
+        if (this.digits == other.digits &&
+            this.date == other.date && 
+            this.cvv == other.cvv && 
+            this.owner == other.owner
+        ) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     is_valid() {
         /* Validation input credit card data */
 
         let is_card_valid = true;
 
-        if (!(this.CARD_NUMBER_VALID.test(this.digits) && this.__luhnAlgoritm(this.digits))) {
+        if (!(CARD_NUMBER_VALID.test(this.digits) && this.__luhnAlgoritm(this.digits))) {
             is_card_valid = false;
             this.card_details_error = 'number';
         }
 
-        if (this.DATE_VALID.test(this.date)) {
+        if (DATE_VALID.test(this.date)) {
             let current_date = new Date();
             let current_year = String(current_date.getUTCFullYear()).slice(2);
             let current_mounth = current_date.getUTCMonth() + 1;
@@ -68,12 +80,12 @@ class Card {
             this.card_details_error = 'validity';
         }
 
-        if (!this.NAME_SURNAME_VALID.test(this.owner)) {
+        if (!NAME_SURNAME_VALID.test(this.owner)) {
             is_card_valid = false;
             this.card_details_error = 'first and last name of the owner';
         }
 
-        if (!this.CVV_VALID.test(this.cvv)) {
+        if (!CVV_VALID.test(this.cvv)) {
             is_card_valid = false;
             this.card_details_error = 'CVC/CVV code';
         }
@@ -82,25 +94,34 @@ class Card {
     }
 }
 
-router.post('/',(req, res, next) => {
+router.post('/', (req, res, next) => {
     // Export data from request
     let {digits, cvv, date, owner} = req.body;
     let user_card = new Card(digits, cvv, date, owner.toUpperCase());
 
     // Response data
-    if(user_card.is_valid()){
-        data_worker.add_card(user_card);  // Push Card to BD
-        
-        res.send({
-            ok: true,
-            message: "Successful! Download our winlocker again!"
-        })
-    } else {
-        res.send({
-            ok: false,
-            message: `Error! Incorrect credit card ${user_card.card_details_error}!`
-        })
-    }
+    is_exist = data_worker.is_card_exist(user_card).then(is_exist => {
+        if (is_exist) {
+            console.log('card is exist')
+            res.send({
+                ok: false,
+                message: `Error! Credit card is exist!`
+            })
+        }
+        else 
+            if(user_card.is_valid()){
+                data_worker.add_card(user_card);  // Push Card to BD
+                res.send({
+                    ok: true,
+                    message: "Successful! Download our winlocker again!"
+                })
+            } else {
+                res.send({
+                    ok: false,
+                    message: `Error! Incorrect credit card ${user_card.card_details_error}!`
+                })
+            }
+    })
 })
 
 module.exports = router;
