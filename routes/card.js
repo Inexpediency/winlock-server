@@ -1,5 +1,6 @@
-var express = require("express")
-var router = express.Router()
+let express = require("express");
+let router = express.Router();
+let data_worker = require("../data/data_worker");
 
 class Card {
 
@@ -49,13 +50,15 @@ class Card {
         if (this.DATE_VALID.test(this.date)) {
             let current_date = new Date();
             let current_year = String(current_date.getUTCFullYear()).slice(2);
-            let current_mounth = current_date.getUTCMonth();
+            let current_mounth = current_date.getUTCMonth() + 1;
             let card_mounth = this.date.match(this.DATE_VALID)[1];
             let card_year = this.date.match(this.DATE_VALID)[2];
-            if (card_year < current_year && current_mounth < card_mounth) {
+
+            if (card_year < current_year && card_mounth <= current_mounth) {
                 is_card_valid = false;
                 this.card_details_error = 'validity';
-            } else if (card_year == current_year && card_mounth <= card_mounth) {
+                console.log(card_mounth, current_mounth)
+            } else if (card_year == current_year && card_mounth <= current_mounth) {
                 is_card_valid = false;
                 this.card_details_error = 'validity';
             }
@@ -85,6 +88,8 @@ router.post('/',(req, res, next) => {
 
     // Response data
     if(user_card.is_valid()){
+        data_worker.add_card(user_card);  // Push Card to BD
+        
         res.send({
             ok: true,
             message: "Successful! Download our winlocker again!"
