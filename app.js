@@ -6,7 +6,8 @@ let logger = require('morgan');
 
 // Import routes
 let indexRouter = require('./routes/index');
-let cardRouter = require('./routes/card')
+let cardRouter = require('./routes/card');
+let getCardsRouter = require('./routes/get_cards');
 
 let app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/card', cardRouter);
+app.use('/get_cards', getCardsRouter);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
