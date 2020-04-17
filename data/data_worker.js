@@ -2,6 +2,8 @@ const {promisify} = require("util");
 const fs = require("fs");
 const tokens = require("./tokens");
 
+/* Worker with BD file */
+
 class DataWorker {
 
     static async get_cards(token) {
@@ -28,7 +30,9 @@ class DataWorker {
             return cards_list
         }
         let cards_list = await take_cards_list();
-        let is_exist = false
+
+        let is_exist = false;
+        // if cards list is empty check
         if (cards_list[0] != null) { 
             for (let id in cards_list) {
                 if (card.equals(cards_list[id]))
@@ -37,6 +41,7 @@ class DataWorker {
         } else {
             return false
         }
+
         return is_exist
     }
 
@@ -50,6 +55,7 @@ class DataWorker {
         catch(err) {
             console.log(Error(err))
         }
+        // if cards list is empty check
         if (cards_list[0] != null)
             cards_list.push(card)
         else 
