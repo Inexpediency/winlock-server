@@ -124,13 +124,13 @@ fetch("http://localhost:3000/", requestOptions)
 <html>
 
 	<head>
-		<title>Winlock API Say BB ur PC bruh xd</title>
+		<title>winlock</title>
 		<link rel="stylesheet" href="/stylesheets/style.css">
 	</head>
 
 	<body>
-		<h1>Winlock API Say BB ur PC bruh xd</h1>
-		<p>Welcome to Winlock API Say BB ur PC bruh xd</p>
+		<h1>WinLock API Server</h1>
+		<p>Say BB ur PC bruh xd</p>
 	</body>
 
 </html>
