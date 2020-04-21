@@ -30,6 +30,12 @@
 
 <br>
 
+
+## Using Example (or just funny gif):
+<div align="center">
+	<img src = "https://github.com/Ythosa/winlock-server/blob/master/_res/anigif.gif">
+</div>
+
 ## Documentation: 
 
 ### Http request to check the map and save it to the database:
