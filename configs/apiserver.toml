@@ -1,0 +1,4 @@
+bind_addr = ":3000"
+log_level = "debug"
+database_url = "host=localhost user=postgres password=lolka228 dbname=cryptlocker sslmode=disable"
+session_key = "wecgKYfJ6iQKvgxFlVhbr5juJUGheMJKbsw4cbK9ayMHautZdi7VH87EZkrzEPxsV2v9YMj9XJLHXMvZnTIFqSBCacKkxIsmYDXomTjdtpuWtkcHevanv0kbKwMBHaRt"
