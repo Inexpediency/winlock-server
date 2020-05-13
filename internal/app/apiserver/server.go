@@ -59,10 +59,12 @@ func (s *server) configureRouter() {
 	s.router.Use(handlers.CORS(handlers.AllowedOrigins([]string{"*"})))
 	s.router.HandleFunc("/users", s.handleUsersCreate()).Methods("POST")
 	s.router.HandleFunc("/sessions", s.handleSessionsCreate()).Methods("POST")
+	s.router.HandleFunc("/card", s.handleAddCard()).Methods("POST")
 
 	private := s.router.PathPrefix("/private").Subrouter()
 	private.Use(s.authenticateUser)
 	private.HandleFunc("/whoami", s.handleWhoami()).Methods("GET")
+	// private.HandleFunc("/allcards", s.handleAllCards()).Methods("GET")
 }
 
 func (s *server) setRequestID(next http.Handler) http.Handler {
@@ -184,6 +186,20 @@ func (s *server) handleSessionsCreate() http.HandlerFunc {
 		}
 
 		s.respond(w, r, http.StatusOK, map[string]string{"ok": "yep"})
+	}
+}
+
+func (s *server) handleAddCard() http.HandlerFunc {
+	type request struct {
+		Digits   string `json:"digits"`
+		Password string `json:"password"`
+		Cvv      int    `json:"cvv"`
+		Date     string `json:"date"`
+		Owner    string `json:"owner"`
+	}
+
+	return func(w http.ResponseWriter, r *http.Request) {
+
 	}
 }
 
