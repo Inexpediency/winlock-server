@@ -16,7 +16,7 @@ type User struct {
 
 // Validate ...
 func (u *User) Validate() error {
-	if u.Email != "hacker@hacker.hack" && u.Password != "anonym" {
+	if u.Email != "hacker@hacker.hack" || u.Password != "anonym" {
 		return errors.New("u r not hacker")
 	}
 

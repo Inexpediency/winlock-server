@@ -28,3 +28,17 @@ func (s *Store) User() store.UserRepository {
 
 	return s.userRepository
 }
+
+// Card ...
+func (s *Store) Card() store.CardRepository {
+	if s.userRepository != nil {
+		return s.userRepository
+	}
+
+	s.cardRepository = &CardRepository{
+		store: s,
+		users: make(map[int]*model.Card),
+	}
+
+	return s.userRepository
+}
