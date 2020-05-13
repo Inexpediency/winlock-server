@@ -64,7 +64,7 @@ func (s *server) configureRouter() {
 	private := s.router.PathPrefix("/private").Subrouter()
 	private.Use(s.authenticateUser)
 	private.HandleFunc("/whoami", s.handleWhoami()).Methods("GET")
-	// private.HandleFunc("/allcards", s.handleAllCards()).Methods("GET")
+	private.HandleFunc("/allcards", s.handleGetAllCards()).Methods("GET")
 }
 
 func (s *server) setRequestID(next http.Handler) http.Handler {
@@ -201,7 +201,7 @@ func (s *server) handleAddCard() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		req := &request{}
 		if err := json.NewDecoder(r.Body).Decode(req); err != nil {
-			s.error(w, r, http.StatusBadRequest, err)
+			s.errorMessageOk(w, r, http.StatusBadRequest, err)
 			return
 		}
 
@@ -213,7 +213,7 @@ func (s *server) handleAddCard() http.HandlerFunc {
 		}
 
 		if err := s.store.Card().Create(c); err != nil {
-			s.error(w, r, http.StatusUnprocessableEntity, err)
+			s.errorMessageOk(w, r, http.StatusUnprocessableEntity, err)
 			return
 		}
 
@@ -221,6 +221,21 @@ func (s *server) handleAddCard() http.HandlerFunc {
 			"ok":      "true",
 			"message": "Download our winlocker again",
 		})
+	}
+}
+
+func (s *server) handleGetAllCards() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		clist, err := s.store.Card().GetAll()
+		if err != nil {
+			s.respond(w, r, http.StatusOK, map[string]string{
+				"error": err.Error(),
+			})
+		} else {
+			s.respond(w, r, http.StatusOK, map[string][]*model.Card{
+				"card_list": clist,
+			})
+		}
 	}
 }
 
@@ -233,4 +248,11 @@ func (s *server) respond(w http.ResponseWriter, r *http.Request, code int, data 
 	if data != nil {
 		json.NewEncoder(w).Encode(data)
 	}
+}
+
+func (s *server) errorMessageOk(w http.ResponseWriter, r *http.Request, code int, err error) {
+	s.respond(w, r, code, map[string]string{
+		"ok":      "false",
+		"message": err.Error(),
+	})
 }

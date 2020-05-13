@@ -35,7 +35,7 @@ func (r *CardRepository) GetAll() ([]*model.Card, error) {
 	cds := make([]*model.Card, 0)
 	for rows.Next() {
 		cd := new(model.Card)
-		err := rows.Scan(&cd.Digits, &cd.Cvv, &cd.Date, &cd.Owner)
+		err := rows.Scan(&cd.ID, &cd.Digits, &cd.Cvv, &cd.Date, &cd.Owner)
 		if err != nil {
 			return nil, err
 		}
