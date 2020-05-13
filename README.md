@@ -33,7 +33,7 @@
 
 ## Using Example (or just funny gif):
 <div align="center">
-	<img src = "https://github.com/Ythosa/winlock-server/blob/master/_res/anigif.gif">
+	<img src = "https://github.com/Ythosa/winlock-server/blob/master/_res/anigi1f.gif">
 </div>
 
 ## Documentation: 
