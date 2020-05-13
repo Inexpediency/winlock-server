@@ -8,3 +8,9 @@ type UserRepository interface {
 	FindByEmail(string) (*model.User, error)
 	Find(int) (*model.User, error)
 }
+
+// CardRepository ...
+type CardRepository interface {
+	Create(*model.Card) error
+	GetAll() ([]*model.Card, error)
+}

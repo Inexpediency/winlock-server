@@ -8,6 +8,7 @@ import (
 
 // Card ...
 type Card struct {
+	ID     int    `json:"id"`
 	Digits string `json:"digits"`
 	Cvv    int    `json:"cvv"`
 	Date   string `json:"date"`

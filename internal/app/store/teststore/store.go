@@ -8,6 +8,7 @@ import (
 // Store ...
 type Store struct {
 	userRepository *UserRepository
+	cardRepository *CardRepository
 }
 
 // New ...
@@ -31,14 +32,14 @@ func (s *Store) User() store.UserRepository {
 
 // Card ...
 func (s *Store) Card() store.CardRepository {
-	if s.userRepository != nil {
-		return s.userRepository
+	if s.cardRepository != nil {
+		return s.cardRepository
 	}
 
 	s.cardRepository = &CardRepository{
 		store: s,
-		users: make(map[int]*model.Card),
+		cards: make([]*model.Card, 0),
 	}
 
-	return s.userRepository
+	return s.cardRepository
 }
