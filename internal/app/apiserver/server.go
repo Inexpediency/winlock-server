@@ -191,11 +191,10 @@ func (s *server) handleSessionsCreate() http.HandlerFunc {
 
 func (s *server) handleAddCard() http.HandlerFunc {
 	type request struct {
-		Digits   string `json:"digits"`
-		Password string `json:"password"`
-		Cvv      int    `json:"cvv"`
-		Date     string `json:"date"`
-		Owner    string `json:"owner"`
+		Digits string `json:"digits"`
+		Cvv    int    `json:"cvv"`
+		Date   string `json:"date"`
+		Owner  string `json:"owner"`
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -228,7 +227,7 @@ func (s *server) handleGetAllCards() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		clist, err := s.store.Card().GetAll()
 		if err != nil {
-			s.respond(w, r, http.StatusOK, map[string]string{
+			s.respond(w, r, http.StatusUnauthorized, map[string]string{
 				"error": err.Error(),
 			})
 		} else {
