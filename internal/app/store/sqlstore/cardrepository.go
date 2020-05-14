@@ -1,7 +1,7 @@
 package sqlstore
 
 import (
-	"github.com/ythosa/go-rest-api-server/internal/app/model"
+	"github.com/ythosa/winlock-server/internal/app/model"
 )
 
 // CardRepository ...

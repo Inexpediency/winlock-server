@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	_ "github.com/lib/pq" // ...
-	"github.com/ythosa/go-rest-api-server/internal/app/store"
+	"github.com/ythosa/winlock-server/internal/app/store"
 )
 
 // Store ...

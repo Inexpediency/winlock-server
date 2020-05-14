@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/sessions"
-	"github.com/ythosa/go-rest-api-server/internal/app/store/sqlstore"
+	"github.com/ythosa/winlock-server/internal/app/store/sqlstore"
 )
 
 // Start ...

@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/ythosa/go-rest-api-server/internal/app/model"
+	"github.com/ythosa/winlock-server/internal/app/model"
 )
 
 func TestCard_Validate(t *testing.T) {

@@ -1,6 +1,6 @@
 package store
 
-import "github.com/ythosa/go-rest-api-server/internal/app/model"
+import "github.com/ythosa/winlock-server/internal/app/model"
 
 // UserRepository ...
 type UserRepository interface {

@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/ythosa/go-rest-api-server/internal/app/model"
-	"github.com/ythosa/go-rest-api-server/internal/app/store/teststore"
+	"github.com/ythosa/winlock-server/internal/app/model"
+	"github.com/ythosa/winlock-server/internal/app/store/teststore"
 )
 
 func TestCardRepository_Create(t *testing.T) {

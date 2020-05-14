@@ -11,8 +11,8 @@ import (
 	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
 	"github.com/stretchr/testify/assert"
-	"github.com/ythosa/go-rest-api-server/internal/app/model"
-	"github.com/ythosa/go-rest-api-server/internal/app/store/teststore"
+	"github.com/ythosa/winlock-server/internal/app/model"
+	"github.com/ythosa/winlock-server/internal/app/store/teststore"
 )
 
 func TestServer_AuthenticateUser(t *testing.T) {

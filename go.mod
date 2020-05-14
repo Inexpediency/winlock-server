@@ -1,4 +1,4 @@
-module github.com/ythosa/go-rest-api-server
+module github.com/ythosa/winlock-server
 
 go 1.14
 
